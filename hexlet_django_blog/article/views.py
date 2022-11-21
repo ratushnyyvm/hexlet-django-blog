@@ -1,21 +1,22 @@
-# from django.http import HttpResponse
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, render
 from django.views import View
 
-
-def index(request):
-    return redirect('article', tags='python', article_id=42)
+from hexlet_django_blog.article.models import Article
 
 
 class IndexView(View):
 
-    def get(self, request, tags, article_id):
-        if tags and article_id:
-            return render(
-                request,
-                'article/index.html',
-                context={
-                    'tags': tags,
-                    'article_id': article_id,
-                }
-            )
+    def get(self, request, *args, **kwargs):
+        articles = Article.objects.all()[:15]
+        return render(request, 'article/index.html', context={
+                'articles': articles,
+        })
+
+
+class ArticleView(View):
+
+    def get(self, request, *args, **kwargs):
+        article = get_object_or_404(Article, id=kwargs['id'])
+        return render(request, 'article/show.html', context={
+            'article': article,
+        })

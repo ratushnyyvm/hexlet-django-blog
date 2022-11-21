@@ -76,6 +76,17 @@ optional = false
 python-versions = ">=3.6"
 
 [[package]]
+name = "python-dotenv"
+version = "0.21.0"
+description = "Read key-value pairs from a .env file and set them as environment variables"
+category = "main"
+optional = false
+python-versions = ">=3.7"
+
+[package.extras]
+cli = ["click (>=5.0)"]
+
+[[package]]
 name = "sqlparse"
 version = "0.4.3"
 description = "A non-validating SQL parser."
@@ -94,7 +105,7 @@ python-versions = ">=2"
 [metadata]
 lock-version = "1.1"
 python-versions = "^3.8"
-content-hash = "eb90327e4dc6deb5f4502b4d868491a0739d001a39dff4413b6a14eb52f57e27"
+content-hash = "19a811cd8185ac9b92548eb70ca15b38183971e618df894b75c55f24883a4d5a"
 
 [metadata.files]
 asgiref = []
@@ -104,5 +115,6 @@ flake8 = []
 mccabe = []
 pycodestyle = []
 pyflakes = []
+python-dotenv = []
 sqlparse = []
 tzdata = []
