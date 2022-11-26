@@ -1,10 +1,26 @@
 {% extends "base.html" %}
 
 {% block content %}
+
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <a href="{% url 'articles_create' %}">Создать статью</a>
+
     <h1>Список статей</h1>
     {% for article in articles %}
         <h2>
             <a href="{% url 'show' article.id %}">{{ article.name }}</a>
+            /<a href="{% url 'articles_update' article.id %}">Edit</a>/
+                <form action="{% url 'articles_delete' article.id %}" method="post">
+                {% csrf_token %}
+                <input class="btn btn-danger" type="submit" value="Удалить">
+                </form>
         </h2>
         <div>{{ article.body|slice:":200" }}</div>
     {% endfor %}
